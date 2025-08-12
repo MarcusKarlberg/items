@@ -28,4 +28,10 @@
   <properties>
     <java.version>17</java.version>
   </properties>
+    <dependencies>
+        <dependency>
+            <groupId>org.apache.kafka</groupId>
+            <artifactId>kafka_2.13</artifactId>
+        </dependency>
+    </dependencies>
 </project>
