@@ -6,17 +6,17 @@ import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.messaging.handler.annotation.Payload;
 import org.springframework.stereotype.Component;
 import se.marcuskarlberg.commands.ReserveItemCommand;
-import se.marcuskarlberg.items.service.ReserveItemService;
+import se.marcuskarlberg.items.service.ReserveItemServiceImpl;
 
 @Slf4j
 @Component
 @KafkaListener(topics = "${rental.commands.topic.name}", groupId = "${spring.kafka.consumer.group-id}")
 public class RentalCommandsHandler {
 
-  private ReserveItemService reserveItemService;
+  private ReserveItemServiceImpl reserveItemServiceImpl;
 
-  public RentalCommandsHandler(ReserveItemService reserveItemService) {
-    this.reserveItemService = reserveItemService;
+  public RentalCommandsHandler(ReserveItemServiceImpl reserveItemServiceImpl) {
+    this.reserveItemServiceImpl = reserveItemServiceImpl;
   }
 
   @KafkaHandler
@@ -27,6 +27,6 @@ public class RentalCommandsHandler {
             reserveItemCommand.getItemId()
     );
 
-    reserveItemService.reserveItem(reserveItemCommand);
+    reserveItemServiceImpl.reserveItem(reserveItemCommand);
   }
 }
